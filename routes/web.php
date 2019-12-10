@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+    // return view('welcome');
+    // トップページ
+    Route::get('/', 'PostsController@index')->name('top');
+    // 新規投稿
+    Route::resource('posts', 'PostsController', ['only' => ['create', 'store']]);
+    // 続きを読むリンク
+    Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show']]);
+    // コメント機能
+    Route::resource('comments', 'CommentsController', ['only' => ['store']]);
+    // 投稿を編集する
+    Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update']]);
+    // 削除する
+    Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
+// });
